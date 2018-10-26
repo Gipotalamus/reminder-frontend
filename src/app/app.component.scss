@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: row;
+
+  app-menu {
+    flex: 0.1;
+  }
+
+  .content {
+      flex: 0.8;
+  }
+
+  .spinner {
+    width: 100%;
+
+    mat-spinner {
+      margin: 0 auto;
+    }
+  }
+}
