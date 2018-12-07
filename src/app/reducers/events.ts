@@ -22,5 +22,7 @@ export function reducer(state = initialState,
   }
 }
 
-export const getEvents = (state: State, page: number, pageSize: number) => state.events.slice(page * pageSize, (page + 1) * pageSize);
+export const getAllEvents = (state: State) => state.events;
+export const getPaginatedEvents = (state: State, page: number, pageSize: number) =>
+  state.events.slice(page * pageSize, (page + 1) * pageSize);
 export const getEventsLength = (state: State) => state.events.length;

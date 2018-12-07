@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Event } from '../models/events.model';
+import { EventResponse } from '../models/http.model';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class HttpDataService {
@@ -9,22 +11,22 @@ export class HttpDataService {
   constructor(private http: HttpClient) { }
 
   getEvents(): Observable<ReadonlyArray<Event>> {
-    return <Observable<ReadonlyArray<Event>>>this.http.get('http://localhost:1234/events/');
+    return <Observable<ReadonlyArray<Event>>>this.http.get(environment.host + 'events/');
   }
 
-  addEvent(event: Event): Observable<Object> {
-    return this.http.post('http://localhost:1234/events/', event);
+  addEvent(event: Event): Observable<Event> {
+    return <Observable<Event>>this.http.post(environment.host + 'events/', event);
   }
 
-  updateEvent(event: Event): Observable<Object> {
-    return this.http.put('http://localhost:1234/events/', event);
+  updateEvent(event: Event): Observable<EventResponse> {
+    return <Observable<EventResponse>>this.http.put(environment.host + 'events/', event);
   }
 
-  deleteEvent(event: Event): Observable<Object> {
-    return this.http.delete(`http://localhost:1234/events/${event._id}`);
+  deleteEvent(event: Event): Observable<EventResponse> {
+    return <Observable<EventResponse>>this.http.delete(environment.host + `events/${event._id}`);
   }
 
-  uploadFiles(file: string): Observable<Object> {
-    return this.http.post('http://localhost:1234/events/upload', JSON.parse(file));
+  uploadFile(file: string): Observable<ReadonlyArray<Event>> {
+    return <Observable<ReadonlyArray<Event>>>this.http.post(environment.host + 'events/upload', JSON.parse(file));
   }
 }

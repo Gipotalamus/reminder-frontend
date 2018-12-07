@@ -22,4 +22,8 @@ export class LoadEffects {
 
   constructor(private actions$: Actions) {
   }
+
+  onEnter() {
+
+  }
 }

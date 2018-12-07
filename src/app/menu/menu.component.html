@@ -1,20 +1,20 @@
 <mat-drawer-container class="menu-container" autosize>
   <mat-drawer #drawer class="menu-sidenav" mode="side">
     <div>
-      <button color="primary" mat-icon-button matTooltip="Add new event" (click)="onAddEvent()">
+      <button color="primary" mat-icon-button matTooltip="Add new event" (click)="onAddEvent(); drawer.close()">
         <mat-icon aria-label="Example icon-button with a heart icon">alarm_add</mat-icon>
       </button>
     </div>
     <div>
       <input #fileInput type="file" hidden (change)="onFileUpload(fileInput.files[0])">
-      <button color="primary" mat-icon-button matTooltip="Add events from file" (click)="fileInput.click()">
+      <button color="primary" mat-icon-button matTooltip="Add events from file" (click)="fileInput.click(); drawer.close()">
         <mat-icon aria-label="Example icon-button with a heart icon">attach_file</mat-icon>
       </button>
     </div>
   </mat-drawer>
 
   <div>
-    <button type="button" mat-button color="accent" matTooltip="Toggle Menu" (click)="drawer.toggle()">
+    <button type="button" mat-button color="primary" matTooltip="Toggle Menu" (click)="drawer.toggle()">
       <mat-icon>more_vert</mat-icon>
     </button>
   </div>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Event } from '../models/events.model';
+import { Event, EventType } from '../models/events.model';
+import { EventsConstants } from '../constants/events';
 
 @Component({
   selector: 'app-events',
@@ -28,5 +29,9 @@ export class EventsComponent implements OnInit {
 
   onEditEvent(event: Event): void {
     this.editEvent.emit(event);
+  }
+
+  getIconByType(type: EventType): string {
+    return EventsConstants.getIconByEventType(type);
   }
 }

@@ -1,9 +1,35 @@
-.mat-expansion-panel-header-title {
-  align-items: center;
+.event-record {
+
+  .event-icon {
+    margin-right: 2em;
+  }
+
+  .time-left, .event-date {
+    display: flex;
+    align-items: center;
+    margin: 0 2em;
+  }
+
+  .action-buttons {
+    visibility: hidden;
+  }
+
+  &:hover {
+    .action-buttons {
+      visibility: visible;
+    }
+  }
+
+  .mat-expansion-panel-header-title {
+    align-items: center;
+  }
+  .mat-expansion-panel-header-description {
+    align-items: center;
+    justify-content: center;
+  }
 }
-.mat-expansion-panel-header-description {
-  align-items: center;
-}
+
+
 
 
 

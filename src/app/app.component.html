@@ -1,6 +1,6 @@
 <div class="container">
   <app-menu
-    (addEvent)="openAddModal($event)"
+    (addEvent)="openAddModal()"
     (uploadFile)="uploadFile($event)">
   </app-menu>
   <div class="content" *ngIf="!(loading$ | async)">

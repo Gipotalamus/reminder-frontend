@@ -24,6 +24,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { EventsEffects } from './effects/events.effects';
 import { PaginationComponent } from './pagination/pagination.component';
 import { LoadEffects } from './effects/load.effects';
+import { TimeLeftPipe } from './pipes/time-left.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { LoadEffects } from './effects/load.effects';
     EventsComponent,
     MenuComponent,
     ModalComponent,
-    PaginationComponent
+    PaginationComponent,
+    TimeLeftPipe
   ],
   imports: [
     HttpClientModule,

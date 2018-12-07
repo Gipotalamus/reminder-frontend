@@ -1,34 +1,39 @@
 <h2 mat-dialog-title>{{data.title}}</h2>
 <mat-dialog-content>
-  <p>
-    <mat-form-field>
-      <input matInput [(ngModel)]="eventName" placeholder="Event name">
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-      <mat-select placeholder="Event type" [(ngModel)]="eventType">
-        <mat-option value="option1">Option 1</mat-option>
-        <mat-option value="option2">Option 2</mat-option>
-        <mat-option value="option3">Option 3</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Select date" [(ngModel)]="eventDate">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker startView="multi-year" #picker></mat-datepicker>
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field class="event-description">
-      <textarea matInput [(ngModel)]="eventDescription" placeholder="Event description"></textarea>
-    </mat-form-field>
-  </p>
+  <form #form="ngForm">
+    <p>
+      <mat-form-field class="event-name">
+        <input matInput [(ngModel)]="eventName" #name="ngModel" name="event-name" required placeholder="Event name">
+        <mat-error *ngIf="name.invalid">Name is required</mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="event-type">
+        <mat-select placeholder="Event type" #type="ngModel" required [(ngModel)]="eventType" name="event-type">
+          <mat-option value="birthday">Birthday</mat-option>
+          <mat-option value="holiday">Holiday</mat-option>
+          <mat-option value="other">Other</mat-option>
+        </mat-select>
+        <mat-error *ngIf="type.invalid">Type is required</mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="event-date">
+        <input matInput [matDatepicker]="picker" #date="ngModel" required placeholder="Select date" [(ngModel)]="eventDate" name="event-date">
+        <mat-error *ngIf="date.invalid">Date is required</mat-error>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker startView="multi-year" #picker></mat-datepicker>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="event-description">
+        <textarea matInput [(ngModel)]="eventDescription" placeholder="Event description" name="event-desctiption"></textarea>
+      </mat-form-field>
+    </p>
+  </form>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
   <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-  <button mat-button (click)="saveEvent()">Ok</button>
+  <button [disabled]="form.invalid" mat-button (click)="saveEvent()">Ok</button>
 </mat-dialog-actions>

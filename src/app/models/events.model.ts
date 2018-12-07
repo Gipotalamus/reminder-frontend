@@ -6,6 +6,6 @@ export interface Event {
   readonly date: Date;
 }
 
-type EventType =
+export type EventType =
   'birthday' |
   'holiday';

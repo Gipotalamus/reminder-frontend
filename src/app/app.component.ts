@@ -7,7 +7,7 @@ import { Event } from './models/events.model';
 import { select, Store } from '@ngrx/store';
 import * as fromEvents from './reducers/events';
 import { Add, Delete, Fetch, Update, Upload } from './actions/events.actions';
-import { getEvents, getEventsLength, getLoading, getPage, getPageSize } from './reducers';
+import { getEventsLength, getLoading, getPage, getPageSize, getPaginatedEvents } from './reducers';
 import { ChangePage, ChangePageSize } from './actions/pagination.actions';
 
 @Component({
@@ -18,7 +18,7 @@ import { ChangePage, ChangePageSize } from './actions/pagination.actions';
 export class AppComponent implements OnInit, OnDestroy {
 
   modalSubscription: Subscription;
-  events$: Observable<ReadonlyArray<Event>> = this.store.pipe(select(getEvents));
+  events$: Observable<ReadonlyArray<Event>> = this.store.pipe(select(getPaginatedEvents));
   loading$: Observable<boolean> = this.store.pipe(select(getLoading));
   page$: Observable<number> = this.store.pipe(select(getPage));
   pageSize$: Observable<number> = this.store.pipe(select(getPageSize));
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private dialog: MatDialog, private dataService: HttpDataService, private store: Store<fromEvents.State>) {}
 
   openAddModal(): void {
-    const modalRef = this.dialog.open(ModalComponent, {data: {title: 'Add event'}});
+    const modalRef = this.dialog.open(ModalComponent, {width: '400px', data: {title: 'Add event'}});
     this.modalSubscription = modalRef.afterClosed().subscribe(result => {
       if (result) {
         this.addEvent(result);
@@ -36,9 +36,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   openEditModal(event: Event): void {
-    const modalRef = this.dialog.open(ModalComponent, {data: {title: 'Edit event', event}});
+    const modalRef = this.dialog.open(ModalComponent, {width: '400px', data: {title: 'Edit event', event}});
     this.modalSubscription = modalRef.afterClosed().subscribe(result => {
-      if (!this.isEqualEvents(event, result)) {
+      if (result) {
         this.updateEvent({...result, _id: event._id});
       }
     });
@@ -76,9 +76,5 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.modalSubscription) {
       this.modalSubscription.unsubscribe();
     }
-  }
-
-  isEqualEvents(e1: Event, e2: Event): boolean {
-    return e1.name === e2.name && e1.description === e2.description && e1.type === e2.type && e1.date === e2.date;
   }
 }

@@ -1,19 +1,24 @@
 <mat-card class="events-container">
   <mat-accordion>
-    <mat-expansion-panel hideToggle *ngFor="let event of events">
+    <mat-expansion-panel class="event-record" hideToggle *ngFor="let event of events">
       <mat-expansion-panel-header>
         <mat-panel-title>
+          <mat-icon class="event-icon" color="primary">{{getIconByType(event.type)}}</mat-icon>
           {{event.type}}
         </mat-panel-title>
+        <div class="event-date">{{event.date | date}}</div>
+        <div class="time-left">{{event.date | timeLeft}}</div>
         <mat-panel-description>
           {{event.name}}
         </mat-panel-description>
-        <button color="primary" mat-icon-button matTooltip="Edit event" (click)="onEditEvent(event); $event.stopPropagation()">
-          <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
-        </button>
-        <button color="primary" mat-icon-button matTooltip="Delete event" (click)="onDeleteEvent(event); $event.stopPropagation()">
-          <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
-        </button>
+        <div class="action-buttons">
+          <button color="primary" mat-icon-button matTooltip="Edit event" (click)="onEditEvent(event); $event.stopPropagation()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button color="primary" mat-icon-button matTooltip="Delete event" (click)="onDeleteEvent(event); $event.stopPropagation()">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </mat-expansion-panel-header>
       <p>{{event.description}}</p>
     </mat-expansion-panel>

@@ -22,7 +22,8 @@ export const getPaginationState = createFeatureSelector<fromPagination.State>('p
 export const getPage = createSelector(getPaginationState, fromPagination.getPage);
 export const getPageSize = createSelector(getPaginationState, fromPagination.getPageSize);
 
-export const getEvents = createSelector(getEventsState, getPage, getPageSize, fromEvents.getEvents);
+export const getAllEvents = createSelector(getEventsState, fromEvents.getAllEvents);
+export const getPaginatedEvents = createSelector(getEventsState, getPage, getPageSize, fromEvents.getPaginatedEvents);
 export const getEventsLength = createSelector(getEventsState, fromEvents.getEventsLength);
 
 export const getLoading = createSelector(getLoadState, fromLoad.getLoad);
